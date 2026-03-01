@@ -19,9 +19,10 @@ const Home = () => {
           </p>
 
           <div className="buttons">
-            <button className="primary-btn">Resume</button>
-            <button className="secondary-btn">Contact Me</button>
-            <button className="secondary-btn">View Projects</button>
+            <a href="https://drive.google.com/file/d/1HfxmXwV7yrJUSLWkogDXjjBN5_rB3bp9/view?usp=drive_link" target="blank"><button className="primary-btn">Resume</button></a>
+            <a href="#contact"><button className="secondary-btn" >Contact Me</button></a>
+            <a href="#Project"><button className="secondary-btn">View Projects</button></a>
+            
           </div>
         </div>
 

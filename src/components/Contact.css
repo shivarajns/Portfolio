@@ -1,0 +1,141 @@
+/* ===== SECTION ===== */
+.contact-section {
+  min-height: 100vh;
+  padding: 100px 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contact-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  color: #ffffff;
+}
+
+/* ===== CONTAINER ===== */
+.contact-container {
+  display: flex;
+  gap: 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ===== INFO SIDE ===== */
+.contact-info {
+  flex: 1;
+  min-width: 280px;
+}
+
+.contact-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #90e0ef;
+}
+
+.contact-info p {
+  color: #cccccc;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.contact-links a {
+  display: inline-block;
+  margin-right: 15px;
+  text-decoration: none;
+  color: #90e0ef;
+  border: 1px solid #90e0ef;
+  padding: 8px 15px;
+  border-radius: 6px;
+  transition: 0.3s;
+}
+
+.contact-links a:hover {
+  background: #90e0ef;
+  color: #0b132b;
+}
+
+/* ===== FORM ===== */
+.contact-form {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px 15px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #cccccc;
+}
+
+.contact-form button {
+  padding: 12px;
+  background: #90e0ef;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background: #48cae4;
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  top: 30px;
+  right: -400px;
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: right 0.5s ease;
+  z-index: 1000;
+}
+
+.toast.show {
+  right: 30px;
+}
+
+.toast.success {
+  background: linear-gradient(135deg, #00b4d8, #0077b6);
+}
+
+.toast.error {
+  background: linear-gradient(135deg, #e63946, #b00020);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 80px 5%;
+  }
+
+  .contact-title {
+    font-size: 2rem;
+  }
+
+  .contact-container {
+    flex-direction: column;
+  }
+}
