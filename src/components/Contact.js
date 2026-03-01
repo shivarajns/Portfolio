@@ -62,7 +62,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <form className="contact-form" onSubmit={handleSubmit}>
+          {/* <form className="contact-form" onSubmit={handleSubmit}>
             <input
               type="text"
               name="name"
@@ -91,7 +91,7 @@ const Contact = () => {
             ></textarea>
 
             <button type="submit">Send Message</button>
-          </form>
+          </form> */}
         </div>
       </section>
 
