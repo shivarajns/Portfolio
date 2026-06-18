@@ -1,105 +1,70 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import "./Contact.css";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: ""
-  });
-
-  const [toast, setToast] = useState({
-    show: false,
-    message: "",
-    type: "success"
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [toast, setToast] = useState({ show: false, message: "", type: "success" });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Simulate message sending
-    setToast({
-      show: true,
-      message: "Message sent successfully!",
-      type: "success"
-    });
-
-    setTimeout(() => {
-      setToast({ ...toast, show: false });
-    }, 3000);
-
-    setFormData({
-      name: "",
-      email: "",
-      message: ""
-    });
+    setToast({ show: true, message: "Message sent successfully!", type: "success" });
+    setTimeout(() => setToast({ ...toast, show: false }), 3000);
+    setFormData({ name: "", email: "", message: "" });
   };
 
   return (
-    <>
-      <section className="contact-section" id="contact">
-        <h2 className="contact-title">Contact Me</h2>
+    <section className="contact-section" id="contact">
+      <div className="ambient-glow"></div>
+      
+      <header className="contact-header">
+        <span className="badge">Get in Touch</span>
+        <h2 className="title-gradient">Let’s Build Something</h2>
+      </header>
 
-        <div className="contact-container">
-          <div className="contact-info">
-            <h3>Let’s Connect</h3>
-            <p>
-              I'm open to opportunities, collaborations, or just a friendly
-              conversation. Feel free to reach out anytime.
-            </p>
-
-            <div className="contact-links">
-              <a href="https://www.linkedin.com/in/shivaraju-ns-0642a6291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="blank">LinkedIn</a>
-              <a href="https://github.com/shivarajns" target="blank">GitHub</a>
-              <a href="mailto:yourmail@example.com">Email</a>
-            </div>
+      <div className="contact-grid">
+        {/* Contact Info Side */}
+        <motion.div 
+          initial={{ opacity: 0, x: -30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          className="info-panel"
+        >
+          <h3>Connect with me</h3>
+          <p>I'm currently open to new opportunities and collaborations. Drop a message or reach out via my socials.</p>
+          
+          <div className="social-links">
+            <a href="https://linkedin.com/in/shivaraju-ns-0642a6291" target="_blank" rel="noreferrer" className="social-pill">LinkedIn</a>
+            <a href="https://github.com/shivarajns" target="_blank" rel="noreferrer" className="social-pill">GitHub</a>
+            <a href="mailto:shivaraju.ns@example.com" className="social-pill">Email</a>
           </div>
+        </motion.div>
 
-          {/* <form className="contact-form" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
+        {/* Form Side */}
+        <motion.div 
+          initial={{ opacity: 0, x: 30 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          className="form-panel"
+        >
+          <form className="glass-form" onSubmit={handleSubmit}>
+            <div className="input-group">
+              <input type="text" name="name" placeholder="Full Name" value={formData.name} onChange={handleChange} required />
+              <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
+            </div>
+            <textarea name="message" rows="5" placeholder="Your Message..." value={formData.message} onChange={handleChange} required></textarea>
+            <button type="submit" className="submit-btn">Send Message</button>
+          </form>
+        </motion.div>
+      </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-
-            <textarea
-              name="message"
-              rows="5"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            ></textarea>
-
-            <button type="submit">Send Message</button>
-          </form> */}
-        </div>
-      </section>
-
-      {/* Toast Notification */}
-      <div className={`toast ${toast.show ? "show" : ""} ${toast.type}`}>
+      {/* Modern Toast Notification */}
+      <div className={`modern-toast ${toast.show ? "show" : ""} ${toast.type}`}>
         {toast.message}
       </div>
-    </>
+    </section>
   );
 };
 

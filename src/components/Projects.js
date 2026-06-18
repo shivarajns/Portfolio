@@ -1,76 +1,85 @@
-import React, { useState } from "react";
+import React from "react";
+import { motion } from "framer-motion";
 import "./Projects.css";
 
 const Projects = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   const projects = [
     {
-      title: "UniPlace",
-      description:
-        "A Placement Tracking System built using Java, Spring Boot, and MySQL. It allows students to manage profiles, track applications, and enables admins to monitor placement statistics efficiently.",
-      demo: "https://shivarajns.github.io/placement-tracking-system/",
-      code: "https://github.com/shivarajns/placement-tracking-system"
+      id: 1,
+      title: "Jobzey",
+      category: "Full Stack System",
+      description: "A full-stack recruitment platform that streamlines job posting, candidate discovery, and application management through intelligent search, secure authentication, and role-based workflows., ",
+      tech: ["Spring Boot", "Java", "MySQL", "React.js", "Git", "Github"],
+      demo: "https://shivarajns.github.io/Jobzey/",
+      code: "https://github.com/shivarajns/Jobzey",
+      size: "large" // Hero Tile
     },
     {
+      id: 2,
       title: "Clima",
-      description:
-        "A modern weather application built using React.js and OpenWeather API. Displays real-time weather data with dynamic UI updates and responsive design.",
+      category: "Frontend Architecture",
+      description: "Real-time weather engine with dynamic UI state management.",
+      tech: ["React.js", "API", "Git", "Github"],
       demo: "https://shivarajns.github.io/clima/",
-      code: "https://github.com/shivarajns/clima"
+      code: "https://github.com/shivarajns/clima",
+      size: "medium" // Feature Tile
     }
   ];
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === projects.length - 1 ? 0 : prev + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) =>
-      prev === 0 ? projects.length - 1 : prev - 1
-    );
-  };
-
   return (
     <section className="projects-section" id="Project">
-      <h2 className="section-title">Projects</h2>
+      <div className="glow-field"></div>
+      
+      <div className="header-stack">
+        <span className="mini-badge">Selected Works</span>
+        <h2 className="title-gradient">Featured Projects</h2>
+      </div>
 
-      <div className="carousel">
-        <button className="nav-btn left" onClick={prevSlide}>
-          ❮
-        </button>
-
-        <div
-          className="carousel-track"
-          style={{
-            transform: `translateX(-${currentIndex * 100}%)`
-          }}
-        >
-          {projects.map((project, index) => (
-            <div className="carousel-slide" key={index}>
-              <div className="project-card">
-                <h3>{project.title}</h3>
-                <p>{project.description}</p>
-
-                <div className="project-buttons">
-                  <a href={project.demo} target="_blank" rel="noreferrer">
-                    <button className="primary-btn">Live Demo</button>
-                  </a>
-
-                  <a href={project.code} target="_blank" rel="noreferrer">
-                    <button className="secondary-btn">View Code</button>
-                  </a>
+      <div className="bento-grid">
+        {projects.map((project) => (
+          <motion.div 
+            key={project.id}
+            className={`bento-card ${project.size}`}
+            whileHover={{ y: -10, transition: { duration: 0.2 } }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <div className="card-glass">
+              <div className="card-header">
+                <span className="cat-text">{project.category}</span>
+                <div className="tech-pills">
+                  {project.tech.map((t, i) => (
+                    <span key={i} className="pill">{t}</span>
+                  ))}
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
 
-        <button className="nav-btn right" onClick={nextSlide}>
-          ❯
-        </button>
+              <div className="card-body">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+              </div>
+
+              <div className="card-footer">
+                <a href={project.demo} target="_blank" rel="noreferrer" className="action-link primary">
+                  Launch Demo
+                </a>
+                <a href={project.code} target="_blank" rel="noreferrer" className="action-link secondary">
+                  Source
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+
+        {/* Placeholder for future growth / Github link */}
+        <motion.div className="bento-card small github-cta">
+          <div className="card-glass center">
+            <p>More on</p>
+            <h4>GitHub</h4>
+            <a href="https://github.com/shivarajns" className="round-btn">→</a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,69 +1,58 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import "./Skills.css";
 
 const Skills = () => {
-  const [active, setActive] = useState("Frontend");
+  const [hoveredCategory, setHoveredCategory] = useState(null);
 
-  const skillsData = {
-    Frontend: [
-      { name: "HTML", rating: 5 },
-      { name: "CSS", rating: 4 },
-      { name: "JavaScript", rating: 4 },
-      { name: "React.js", rating: 4 }
-    ],
-    Backend: [
-      { name: "Java", rating: 5 },
-      { name: "Spring Boot", rating: 4 }
-    ],
-    Database: [
-      { name: "MySQL", rating: 4 }
-    ],
-    Tools: [
-      { name: "Git", rating: 4 },
-      { name: "GitHub", rating: 4 },
-      { name: "Postman", rating: 4 }
-    ],
-    Other: [
-      { name: "Operating Systems", rating: 4 },
-      { name: "Computer Networks", rating: 4 },
-      { name: "Protocols", rating: 3 }
-    ]
-  };
+  const skills = [
+    { name: "React.js", cat: "frontend" },
+    { name: "JavaScript", cat: "frontend" },
+    { name: "Spring Boot", cat: "backend" },
+    { name: "Java", cat: "backend" },
+    { name: "MySQL", cat: "database" },
+    { name: "RESTful APIs", cat: "backend" },
+    { name: "Git / GitHub", cat: "tools" },
+    { name: "Postman", cat: "tools" },
+    { name: "Docker", cat: "tools" },
+    { name: "HTML", cat: "frontend" },
+    { name: "CSS", cat: "frontend" },
+  ];
 
-  const renderStars = (rating) => {
-    return (
-      <div className="stars">
-        {[...Array(5)].map((_, index) => (
-          <span key={index} className={index < rating ? "filled" : ""}>
-            ★
-          </span>
-        ))}
-      </div>
-    );
-  };
+  const categories = ["frontend", "backend", "database", "tools"];
 
   return (
     <section className="skills-section" id="skills">
-      <h2 className="section-title">My Skills</h2>
+      <div className="skills-header">
+        <span className="badge">Knowledge Base</span>
+        <h2 className="title-gradient">Technical Arsenal</h2>
+      </div>
 
-      <div className="tabs">
-        {Object.keys(skillsData).map((category) => (
-          <button
-            key={category}
-            className={`tab-btn ${active === category ? "active" : ""}`}
-            onClick={() => setActive(category)}
+      <div className="category-filters">
+        {categories.map((cat) => (
+          <button 
+            key={cat}
+            onMouseEnter={() => setHoveredCategory(cat)}
+            onMouseLeave={() => setHoveredCategory(null)}
+            className={`filter-tag ${hoveredCategory === cat ? 'active' : ''}`}
           >
-            {category}
+            {cat}
           </button>
         ))}
       </div>
 
-      <div className="skills-card">
-        {skillsData[active].map((skill, index) => (
-          <div className="skill-item" key={index}>
-            <span className="skill-name">{skill.name}</span>
-            {renderStars(skill.rating)}
-          </div>
+      <div className="skills-cloud">
+        {skills.map((skill, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.05 }}
+            className={`skill-tag ${hoveredCategory === skill.cat ? "highlight" : ""} ${hoveredCategory && hoveredCategory !== skill.cat ? "dim" : ""}`}
+          >
+            <div className="dot"></div>
+            {skill.name}
+          </motion.div>
         ))}
       </div>
     </section>
